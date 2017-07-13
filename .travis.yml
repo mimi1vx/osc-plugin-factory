@@ -31,3 +31,25 @@ matrix:
         - nosetests --with-coverage --cover-package=osclib --cover-inclusive
       after_success:
         - coveralls
+    #- env: TEST_SUITE=obs
+    - env: TEST_SUITE=backend
+      sudo: false
+      # TODO git clone obs and parse these lines
+      # Possibly https://github.com/travis-ci/travis-yaml
+      # perhaps build a docoker container that does all these things
+      # TODO Install deps for other language environment
+      language: ruby
+      rvm: 2.4.1
+      install:
+        - cd open-build-service && bundle install --jobs=3 --retry=3 --deployment --path=${BUNDLE_PATH:-vendor/bundle} --without=development
+      gemfile: open-build-service/src/api/Gemfile
+      script:
+        - "open-build-service/dist/ci/travis_script.sh $TEST_SUITE"
+      before_install:
+        # TODO Last stable tag.
+        - git clone https://github.com/openSUSE/open-build-service.git
+        - open-build-service/dist/ci/travis_before_install.sh
+      before_script: open-build-service/dist/ci/travis_before_script.sh
+      after_failure: open-build-service/dist/ci/travis_after_failure.sh
+      #after_success:
+        #- coveralls
