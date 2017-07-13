@@ -42,7 +42,7 @@ matrix:
       rvm: 2.4.1
       dist: trusty
       install:
-        - cd open-build-service && bundle install --jobs=3 --retry=3 --deployment --path=${BUNDLE_PATH:-vendor/bundle} --without=development
+        - bundle install --jobs=3 --retry=3 --deployment --path=${BUNDLE_PATH:-vendor/bundle} --without=development
       gemfile: open-build-service/src/api/Gemfile
       script:
         - "open-build-service/dist/ci/travis_script.sh $TEST_SUITE"
