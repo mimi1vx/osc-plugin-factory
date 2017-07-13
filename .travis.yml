@@ -50,7 +50,9 @@ matrix:
         # TODO Last stable tag.
         - git clone https://github.com/openSUSE/open-build-service.git
         - open-build-service/dist/ci/travis_before_install.sh
-      before_script: open-build-service/dist/ci/travis_before_script.sh
-      after_failure: open-build-service/dist/ci/travis_after_failure.sh
+      before_script: (cd open-build-service && dist/ci/travis_before_script.sh)
+      after_failure: (cd open-build-service && dist/ci/travis_after_failure.sh)
       #after_success:
         #- coveralls
+      services:
+        - memcached
