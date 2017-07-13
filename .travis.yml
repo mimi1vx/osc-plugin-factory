@@ -33,7 +33,7 @@ matrix:
         - coveralls
     #- env: TEST_SUITE=obs
     - env: TEST_SUITE=backend
-      sudo: false
+      sudo: required
       # TODO git clone obs and parse these lines
       # Possibly https://github.com/travis-ci/travis-yaml
       # perhaps build a docoker container that does all these things
