@@ -45,7 +45,7 @@ matrix:
         - (cd open-build-service/src/api && bundle install --jobs=3 --retry=3 --deployment --path=${BUNDLE_PATH:-vendor/bundle} --without=development)
       #gemfile: src/api/Gemfile
       script:
-        - "(cd open-build-service/src/api && dist/ci/travis_script.sh $TEST_SUITE)"
+        - "(cd open-build-service && dist/ci/travis_script.sh $TEST_SUITE)"
       before_install:
         # TODO Last stable tag.
         - git clone https://github.com/openSUSE/open-build-service.git
